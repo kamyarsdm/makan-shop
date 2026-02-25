@@ -1,0 +1,75 @@
+<!-- products.html -->
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>محصولات | فروشگاه ماکان</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header__row">
+      <div class="brand">
+        <a class="brand__logo" href="index.html">م</a>
+        <a class="brand__name" href="index.html">فروشگاه ماکان</a>
+      </div>
+
+      <div class="search">
+        <input id="q" type="search" placeholder="جستجو محصول..." />
+        <button id="btnSearch" class="btn">جستجو</button>
+      </div>
+
+      <nav class="nav">
+        <a href="index.html" class="nav__link">خانه</a>
+        <a href="products.html" class="nav__link active">محصولات</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <div class="section__head">
+        <h1>محصولات</h1>
+        <span id="count" class="muted"></span>
+      </div>
+
+      <div class="filters">
+        <select id="cat">
+          <option value="">همه دسته‌ها</option>
+        </select>
+
+        <select id="sort">
+          <option value="new">جدیدترین</option>
+          <option value="cheap">ارزان‌ترین</option>
+          <option value="expensive">گران‌ترین</option>
+        </select>
+
+        <label class="check">
+          <input id="onlyInStock" type="checkbox" />
+          <span>فقط موجود</span>
+        </label>
+
+        <label class="check">
+          <input id="onlyDiscount" type="checkbox" />
+          <span>فقط تخفیف‌دار</span>
+        </label>
+      </div>
+
+      <div id="list" class="grid grid--products"></div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__bottom">
+      <span class="muted">© تمامی حقوق محفوظ است</span>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    window.App.initProducts();
+  </script>
+</body>
+</html>

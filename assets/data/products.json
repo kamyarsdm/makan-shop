@@ -1,0 +1,46 @@
+[
+  {
+    "id": "p1",
+    "slug": "cream-a",
+    "title": "کرم آبرسان A",
+    "category": "اسکین‌کر",
+    "price_toman": 420000,
+    "discount_percent": 15,
+    "in_stock": true,
+    "short_desc": "مناسب پوست خشک و نرمال",
+    "images": []
+  },
+  {
+    "id": "p2",
+    "slug": "lipstick-b",
+    "title": "رژ لب B",
+    "category": "لب",
+    "price_toman": 310000,
+    "discount_percent": 0,
+    "in_stock": true,
+    "short_desc": "رنگ مات و ماندگار",
+    "images": []
+  },
+  {
+    "id": "p3",
+    "slug": "sunscreen-c",
+    "title": "ضد آفتاب C",
+    "category": "اسکین‌کر",
+    "price_toman": 560000,
+    "discount_percent": 20,
+    "in_stock": false,
+    "short_desc": "SPF50 سبک و بدون چربی",
+    "images": []
+  },
+  {
+    "id": "p4",
+    "slug": "shampoo-d",
+    "title": "شامپو D",
+    "category": "مو",
+    "price_toman": 275000,
+    "discount_percent": 10,
+    "in_stock": true,
+    "short_desc": "مناسب موهای آسیب‌دیده",
+    "images": []
+  }
+]
