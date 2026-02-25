@@ -31,11 +31,20 @@
     return Array.from(new Set(arr));
   }
 
+  function firstImage(p) {
+    const imgs = Array.isArray(p.images) ? p.images : [];
+    return imgs.length ? String(imgs[0]) : "";
+  }
+
+  function safeText(s) {
+    return String(s || "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
   function renderCategoryCard(cat) {
     return `
       <div class="card cat" data-cat="${encodeURIComponent(cat)}">
         <div class="cat__icon">#</div>
-        <div class="cat__name">${cat}</div>
+        <div class="cat__name">${safeText(cat)}</div>
       </div>
     `;
   }
@@ -60,10 +69,14 @@
            <div class="price__new">${toman(newPrice)}</div>
          </div>`;
 
+    const img = firstImage(p);
+
     return `
       <a class="card product" href="product.html?slug=${encodeURIComponent(p.slug)}">
-        <div class="product__img">تصویر</div>
-        <div class="product__title">${p.title}</div>
+        <div class="product__img">
+          ${img ? `<img src="${img}" alt="${safeText(p.title)}" loading="lazy" />` : `تصویر`}
+        </div>
+        <div class="product__title">${safeText(p.title)}</div>
         <div class="row">
           ${priceHtml}
           ${badge}
@@ -99,7 +112,6 @@
     const products = await loadProducts();
     const categories = uniq(products.map(p => p.category).filter(Boolean));
 
-    // categories grid
     const catsEl = document.getElementById("cats");
     if (catsEl) {
       catsEl.innerHTML = categories.map(renderCategoryCard).join("");
@@ -111,7 +123,6 @@
       });
     }
 
-    // deals
     const deals = products
       .filter(p => Number(p.discount_percent || 0) > 0)
       .slice(0, 8);
@@ -119,7 +130,6 @@
     const dealEl = document.getElementById("dealList");
     if (dealEl) dealEl.innerHTML = deals.map(renderProductCard).join("");
 
-    // newest
     const newest = products.slice().reverse().slice(0, 8);
     const newEl = document.getElementById("newList");
     if (newEl) newEl.innerHTML = newest.map(renderProductCard).join("");
@@ -143,11 +153,10 @@
     const onlyInStock = document.getElementById("onlyInStock");
     const onlyDiscount = document.getElementById("onlyDiscount");
 
-    // fill categories
     const categories = uniq(products.map(p => p.category).filter(Boolean));
     if (catSelect) {
       catSelect.innerHTML = `<option value="">همه دسته‌ها</option>` +
-        categories.map(c => `<option value="${c}">${c}</option>`).join("");
+        categories.map(c => `<option value="${safeText(c)}">${safeText(c)}</option>`).join("");
       if (catParam) catSelect.value = catParam;
     }
 
@@ -176,13 +185,11 @@
       if (inStock) list = list.filter(p => !!p.in_stock);
       if (discount) list = list.filter(p => Number(p.discount_percent || 0) > 0);
 
-      // sort
       if (sort === "cheap") {
         list.sort((a, b) => calcFinalPrice(a).newPrice - calcFinalPrice(b).newPrice);
       } else if (sort === "expensive") {
         list.sort((a, b) => calcFinalPrice(b).newPrice - calcFinalPrice(a).newPrice);
       } else {
-        // new: keep json order (assume last is newest) -> reverse for newest first
         list = list.slice().reverse();
       }
 
@@ -193,14 +200,12 @@
       if (countEl) countEl.textContent = `${list.length} محصول`;
     }
 
-    // wire filters
     [qInput, catSelect, sortSelect, onlyInStock, onlyDiscount].forEach(el => {
       if (!el) return;
       const ev = (el.tagName === "INPUT" && el.type === "search") ? "input" : "change";
       el.addEventListener(ev, apply);
     });
 
-    // initial apply
     apply();
   }
 
@@ -213,7 +218,7 @@
     if (!host) return;
 
     if (!p) {
-      host.innerHTML = `<div class="card">محصول یافت نشد.</div>`;
+      host.innerHTML = `<div class="card" style="padding:12px">محصول یافت نشد.</div>`;
       return;
     }
 
@@ -223,17 +228,33 @@
 
     document.title = `${p.title} | ${STORE_NAME}`;
 
+    const imgs = Array.isArray(p.images) ? p.images.map(String).filter(Boolean) : [];
+    const mainImg = imgs.length ? imgs[0] : "";
+
+    const thumbsHtml = imgs.length > 1
+      ? `<div class="thumbs">
+          ${imgs.map((src, idx) => `
+            <button class="thumb ${idx === 0 ? "thumb--active" : ""}" type="button" data-src="${src}">
+              <img src="${src}" alt="${safeText(p.title)} ${idx + 1}" loading="lazy" />
+            </button>
+          `).join("")}
+        </div>`
+      : ``;
+
     host.innerHTML = `
       <div class="gallery">
-        <div class="gallery__main">تصویر</div>
+        <div class="gallery__main" id="mainImage">
+          ${mainImg ? `<img src="${mainImg}" alt="${safeText(p.title)}" />` : `تصویر`}
+        </div>
+        ${thumbsHtml}
         <div class="divider"></div>
-        <div class="muted">دسته: ${p.category || "-"}</div>
+        <div class="muted">دسته: ${safeText(p.category || "-")}</div>
         <div class="muted">وضعیت: ${stock ? "موجود" : "ناموجود"}</div>
       </div>
 
       <div class="info">
-        <h1>${p.title}</h1>
-        <p>${p.short_desc || "توضیحات محصول اینجا قرار می‌گیرد."}</p>
+        <h1>${safeText(p.title)}</h1>
+        <p>${safeText(p.short_desc || "توضیحات محصول اینجا قرار می‌گیرد.")}</p>
 
         <div class="row">
           <div class="price">
@@ -252,6 +273,19 @@
         </div>
       </div>
     `;
+
+    if (imgs.length > 1) {
+      const main = document.getElementById("mainImage");
+      host.querySelectorAll(".thumb").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const src = btn.getAttribute("data-src") || "";
+          if (!src || !main) return;
+          main.innerHTML = `<img src="${src}" alt="${safeText(p.title)}" />`;
+          host.querySelectorAll(".thumb").forEach(x => x.classList.remove("thumb--active"));
+          btn.classList.add("thumb--active");
+        });
+      });
+    }
   }
 
   window.App = { initHome, initProducts, initProduct };

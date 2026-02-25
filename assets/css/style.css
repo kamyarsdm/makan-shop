@@ -122,6 +122,7 @@ a{ color:inherit; text-decoration:none; }
   border:1px solid var(--border);
   background:#fff;
   cursor:pointer;
+  font-family: inherit;
 }
 .btn--primary{
   border-color:transparent;
@@ -242,8 +243,15 @@ a{ color:inherit; text-decoration:none; }
   background:linear-gradient(135deg, rgba(225,29,72,.10), rgba(251,113,133,.08));
   display:grid;
   place-items:center;
+  overflow:hidden;
   color:rgba(17,24,39,.35);
   font-weight:900;
+}
+.product__img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
 }
 .product__title{
   font-weight:800;
@@ -328,9 +336,46 @@ select{
   background:linear-gradient(135deg, rgba(225,29,72,.10), rgba(251,113,133,.08));
   display:grid;
   place-items:center;
+  overflow:hidden;
   color:rgba(17,24,39,.35);
   font-weight:900;
 }
+.gallery__main img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.thumbs{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+  overflow:auto;
+  padding-bottom:2px;
+}
+.thumb{
+  flex:0 0 auto;
+  width:68px;
+  height:68px;
+  padding:0;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:#fff;
+  overflow:hidden;
+  cursor:pointer;
+}
+.thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.thumb--active{
+  border-color: rgba(225,29,72,.55);
+  box-shadow: 0 0 0 3px rgba(225,29,72,.12);
+}
+
 .info{
   background:#fff;
   border:1px solid var(--border);
