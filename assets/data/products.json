@@ -8,7 +8,7 @@
     "discount_percent": 15,
     "in_stock": true,
     "short_desc": "مناسب پوست خشک و نرمال",
-    "images": ["./assets/images/p1/1.jpg"]
+    "images": ["assets/images/p1/1.jpg"]
   },
   {
     "id": "p2",
@@ -19,7 +19,7 @@
     "discount_percent": 0,
     "in_stock": true,
     "short_desc": "رنگ مات و ماندگار",
-    "images": ["./assets/images/p2/1.jpg"]
+    "images": ["assets/images/p2/1.jpg"]
   },
   {
     "id": "p3",
@@ -30,7 +30,7 @@
     "discount_percent": 20,
     "in_stock": false,
     "short_desc": "SPF50 سبک و بدون چربی",
-    "images": ["./assets/images/p3/1.jpg"]
+    "images": ["assets/images/p3/1.jpg"]
   },
   {
     "id": "p4",
@@ -41,6 +41,6 @@
     "discount_percent": 10,
     "in_stock": true,
     "short_desc": "مناسب موهای آسیب‌دیده",
-    "images": ["./assets/images/p4/1.jpg"]
+    "images": ["assets/images/p4/1.jpg"]
   }
 ]
