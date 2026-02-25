@@ -6,6 +6,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>فروشگاه ماکان</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800;900&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
@@ -52,7 +57,7 @@
 
   <main>
 
-    <!-- دو بنر بزرگ مثل نمونه -->
+    <!-- دو بنر بزرگ -->
     <section class="section">
       <div class="container">
         <div class="banners">
@@ -126,10 +131,8 @@
 
   <script src="assets/js/app.js"></script>
   <script>
-    // Home init
     window.App.initHome();
 
-    // ساخت نوار دسته‌بندی افقی از روی داده‌ها (بدون تغییر app.js)
     fetch("assets/data/products.json", { cache: "no-store" })
       .then(r => r.json())
       .then(list => {

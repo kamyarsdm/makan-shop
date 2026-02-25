@@ -18,7 +18,7 @@
 html,body{ height:100%; }
 body{
   margin:0;
-  font-family: Tahoma, "Segoe UI", Arial, sans-serif;
+  font-family: "Vazirmatn", Tahoma, "Segoe UI", Arial, sans-serif;
   background:var(--bg2);
   color:var(--text);
 }
@@ -185,7 +185,7 @@ a{ color:inherit; text-decoration:none; }
   line-height:1.8;
 }
 
-/* category strip like sample */
+/* category strip */
 .catsStrip{
   display:flex;
   gap:10px;
@@ -215,7 +215,7 @@ a{ color:inherit; text-decoration:none; }
 .grid{ display:grid; gap:12px; }
 .grid--products{ grid-template-columns:repeat(4,1fr); }
 
-/* product cards (همون قبلی، ساده و روشن) */
+/* product cards */
 .card{
   background:var(--card);
   border:1px solid var(--border);

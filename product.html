@@ -6,21 +6,44 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>محصول | فروشگاه ماکان</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800;900&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-  <header class="header">
-    <div class="container header__row">
+  <div class="utility">
+    <div class="container utility__row">
+      <div class="utility__left">
+        <a class="uLink" href="#" title="ورود (دمو)">ورود به حساب</a>
+      </div>
+      <div class="utility__right">
+        <a class="cartMini" href="#" title="سبد خرید (دمو)">
+          <span class="cartMini__icon">🛒</span>
+          <span class="cartMini__count">0</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="topbar">
+    <div class="container topbar__row">
       <div class="brand">
         <a class="brand__logo" href="index.html">م</a>
-        <a class="brand__name" href="index.html">فروشگاه ماکان</a>
+        <div>
+          <a class="brand__name" href="index.html">فروشگاه ماکان</a>
+          <div class="brand__tag">آرایشی و بهداشتی</div>
+        </div>
       </div>
+
       <nav class="nav">
-        <a href="index.html" class="nav__link">خانه</a>
+        <a href="index.html" class="nav__link">صفحه اصلی</a>
         <a href="products.html" class="nav__link">محصولات</a>
       </nav>
     </div>
-  </header>
+  </div>
 
   <main class="section">
     <div class="container">
@@ -35,8 +58,6 @@
   </footer>
 
   <script src="assets/js/app.js"></script>
-  <script>
-    window.App.initProduct();
-  </script>
+  <script>window.App.initProduct();</script>
 </body>
 </html>
