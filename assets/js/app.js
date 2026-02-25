@@ -31,13 +31,26 @@
     return Array.from(new Set(arr));
   }
 
-  function firstImage(p) {
-    const imgs = Array.isArray(p.images) ? p.images : [];
-    return imgs.length ? String(imgs[0]) : "";
-  }
-
   function safeText(s) {
     return String(s || "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  function normalizeImages(p) {
+    // پشتیبانی از حالت‌های مختلف:
+    // images: ["..."] یا images: "..." یا image: "..."
+    const imgs = p && p.images;
+    if (Array.isArray(imgs)) return imgs.map(String).filter(Boolean);
+    if (typeof imgs === "string" && imgs.trim()) return [imgs.trim()];
+
+    const single = p && p.image;
+    if (typeof single === "string" && single.trim()) return [single.trim()];
+
+    return [];
+  }
+
+  function firstImage(p) {
+    const imgs = normalizeImages(p);
+    return imgs.length ? imgs[0] : "";
   }
 
   function renderCategoryCard(cat) {
@@ -106,7 +119,6 @@
 
   async function initHome() {
     document.title = STORE_NAME;
-
     wireSearch();
 
     const products = await loadProducts();
@@ -155,13 +167,13 @@
 
     const categories = uniq(products.map(p => p.category).filter(Boolean));
     if (catSelect) {
-      catSelect.innerHTML = `<option value="">همه دسته‌ها</option>` +
+      catSelect.innerHTML =
+        `<option value="">همه دسته‌ها</option>` +
         categories.map(c => `<option value="${safeText(c)}">${safeText(c)}</option>`).join("");
       if (catParam) catSelect.value = catParam;
     }
 
     if (sortSelect) sortSelect.value = sortParam;
-
     if (onlyDiscount && filterParam === "discount") onlyDiscount.checked = true;
 
     function apply() {
@@ -228,7 +240,7 @@
 
     document.title = `${p.title} | ${STORE_NAME}`;
 
-    const imgs = Array.isArray(p.images) ? p.images.map(String).filter(Boolean) : [];
+    const imgs = normalizeImages(p);
     const mainImg = imgs.length ? imgs[0] : "";
 
     const thumbsHtml = imgs.length > 1
