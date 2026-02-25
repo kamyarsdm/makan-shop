@@ -1,75 +1,125 @@
-<!-- products.html -->
+<!-- index.html -->
 
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>محصولات | فروشگاه ماکان</title>
+  <title>فروشگاه ماکان</title>
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-  <header class="header">
-    <div class="container header__row">
+  <div class="topbar">
+    <div class="container topbar__row">
       <div class="brand">
-        <a class="brand__logo" href="index.html">م</a>
-        <a class="brand__name" href="index.html">فروشگاه ماکان</a>
+        <div class="brand__logo">م</div>
+        <div>
+          <div class="brand__name">فروشگاه ماکان</div>
+          <div class="brand__tag">آرایشی و بهداشتی</div>
+        </div>
       </div>
 
       <div class="search">
-        <input id="q" type="search" placeholder="جستجو محصول..." />
-        <button id="btnSearch" class="btn">جستجو</button>
+        <input id="q" type="search" placeholder="جستجو در محصولات..." />
+        <button id="btnSearch" class="btn btn--primary">جستجو</button>
       </div>
 
       <nav class="nav">
-        <a href="index.html" class="nav__link">خانه</a>
-        <a href="products.html" class="nav__link active">محصولات</a>
+        <a href="index.html" class="nav__link active">خانه</a>
+        <a href="products.html" class="nav__link">محصولات</a>
+        <a href="#footer" class="nav__link">تماس</a>
       </nav>
     </div>
-  </header>
+  </div>
 
-  <main class="section">
-    <div class="container">
-      <div class="section__head">
-        <h1>محصولات</h1>
-        <span id="count" class="muted"></span>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero__wrap">
+          <div class="hero__grid">
+            <div class="hero__content">
+              <h1>فروشگاه ماکان</h1>
+              <p>دموی ظاهری فروشگاه برای ارائه به مشتری — بعداً خرید و پرداخت هم اضافه می‌شود.</p>
+              <div class="hero__actions">
+                <a class="btn btn--primary" href="products.html">مشاهده محصولات</a>
+                <a class="btn" href="#deals">تخفیف‌های ویژه</a>
+              </div>
+
+              <div class="trust">
+                <div class="trust__item">ارسال سریع</div>
+                <div class="trust__item">ضمانت اصالت کالا</div>
+                <div class="trust__item">پشتیبانی</div>
+                <div class="trust__item">قیمت مناسب</div>
+              </div>
+            </div>
+
+            <div class="hero__banner">
+              <div class="bannerBox">
+                <div class="bannerBox__title">بنر تخفیف</div>
+                <div class="bannerBox__subtitle">عکس/متن تبلیغاتی اینجا قرار می‌گیرد</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+    </section>
 
-      <div class="filters">
-        <select id="cat">
-          <option value="">همه دسته‌ها</option>
-        </select>
-
-        <select id="sort">
-          <option value="new">جدیدترین</option>
-          <option value="cheap">ارزان‌ترین</option>
-          <option value="expensive">گران‌ترین</option>
-        </select>
-
-        <label class="check">
-          <input id="onlyInStock" type="checkbox" />
-          <span>فقط موجود</span>
-        </label>
-
-        <label class="check">
-          <input id="onlyDiscount" type="checkbox" />
-          <span>فقط تخفیف‌دار</span>
-        </label>
+    <section class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>دسته‌بندی‌ها</h2>
+          <a class="link" href="products.html">همه محصولات</a>
+        </div>
+        <div id="cats" class="grid grid--cats"></div>
       </div>
+    </section>
 
-      <div id="list" class="grid grid--products"></div>
-    </div>
+    <section id="deals" class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>تخفیف‌های ویژه</h2>
+          <a class="link" href="products.html?filter=discount">مشاهده همه</a>
+        </div>
+        <div id="dealList" class="grid grid--products"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>محصولات جدید</h2>
+          <a class="link" href="products.html?sort=new">مشاهده همه</a>
+        </div>
+        <div id="newList" class="grid grid--products"></div>
+      </div>
+    </section>
   </main>
 
-  <footer class="footer">
+  <footer id="footer" class="footer">
+    <div class="container footer__grid">
+      <div>
+        <h3>فروشگاه ماکان</h3>
+        <p class="muted">این نسخه صرفاً دمو برای نمایش ظاهر فروشگاه است.</p>
+      </div>
+      <div>
+        <h3>لینک‌ها</h3>
+        <a href="products.html" class="footer__link">محصولات</a>
+        <a href="#" class="footer__link">قوانین</a>
+        <a href="#" class="footer__link">درباره ما</a>
+      </div>
+      <div>
+        <h3>راه‌های تماس</h3>
+        <div class="muted">واتساپ: 09xxxxxxxxx</div>
+        <div class="muted">تلگرام: @yourid</div>
+        <div class="muted">اینستاگرام: @yourpage</div>
+      </div>
+    </div>
     <div class="container footer__bottom">
       <span class="muted">© تمامی حقوق محفوظ است</span>
     </div>
   </footer>
 
   <script src="assets/js/app.js"></script>
-  <script>
-    window.App.initProducts();
-  </script>
+  <script>window.App.initHome();</script>
 </body>
 </html>
