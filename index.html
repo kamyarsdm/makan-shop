@@ -9,6 +9,24 @@
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
+
+  <!-- نوار خیلی بالا: ورود + سبد (دمویی) -->
+  <div class="utility">
+    <div class="container utility__row">
+      <div class="utility__left">
+        <a class="uLink" href="#" title="ورود (دمو)">ورود به حساب</a>
+      </div>
+
+      <div class="utility__right">
+        <a class="cartMini" href="#" title="سبد خرید (دمو)">
+          <span class="cartMini__icon">🛒</span>
+          <span class="cartMini__count">0</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- هدر اصلی -->
   <div class="topbar">
     <div class="container topbar__row">
       <div class="brand">
@@ -25,52 +43,38 @@
       </div>
 
       <nav class="nav">
-        <a href="index.html" class="nav__link active">خانه</a>
+        <a href="index.html" class="nav__link active">صفحه اصلی</a>
         <a href="products.html" class="nav__link">محصولات</a>
-        <a href="#footer" class="nav__link">تماس</a>
+        <a href="#footer" class="nav__link">درباره ما</a>
       </nav>
     </div>
   </div>
 
   <main>
-    <section class="hero">
+
+    <!-- دو بنر بزرگ مثل نمونه -->
+    <section class="section">
       <div class="container">
-        <div class="hero__wrap">
-          <div class="hero__grid">
-            <div class="hero__content">
-              <h1>فروشگاه ماکان</h1>
-              <p>دموی ظاهری فروشگاه برای ارائه به مشتری — بعداً خرید و پرداخت هم اضافه می‌شود.</p>
-              <div class="hero__actions">
-                <a class="btn btn--primary" href="products.html">مشاهده محصولات</a>
-                <a class="btn" href="#deals">تخفیف‌های ویژه</a>
-              </div>
+        <div class="banners">
+          <a class="banner banner--a" href="products.html?filter=discount">
+            <div class="banner__badge">تخفیف ویژه</div>
+            <div class="banner__title">بنر شماره ۱</div>
+            <div class="banner__sub">عکس/متن تبلیغاتی اینجا</div>
+          </a>
 
-              <div class="trust">
-                <div class="trust__item">ارسال سریع</div>
-                <div class="trust__item">ضمانت اصالت کالا</div>
-                <div class="trust__item">پشتیبانی</div>
-                <div class="trust__item">قیمت مناسب</div>
-              </div>
-            </div>
-
-            <div class="hero__banner">
-              <div class="bannerBox">
-                <div class="bannerBox__title">بنر تخفیف</div>
-                <div class="bannerBox__subtitle">عکس/متن تبلیغاتی اینجا قرار می‌گیرد</div>
-              </div>
-            </div>
-          </div>
+          <a class="banner banner--b" href="products.html">
+            <div class="banner__badge">جدیدها</div>
+            <div class="banner__title">بنر شماره ۲</div>
+            <div class="banner__sub">عکس/متن تبلیغاتی اینجا</div>
+          </a>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <!-- نوار دسته‌بندی افقی -->
+    <section class="section section--tight">
       <div class="container">
-        <div class="section__head">
-          <h2>دسته‌بندی‌ها</h2>
-          <a class="link" href="products.html">همه محصولات</a>
-        </div>
-        <div id="cats" class="grid grid--cats"></div>
+        <div id="catsStrip" class="catsStrip"></div>
       </div>
     </section>
 
@@ -93,6 +97,7 @@
         <div id="newList" class="grid grid--products"></div>
       </div>
     </section>
+
   </main>
 
   <footer id="footer" class="footer">
@@ -120,6 +125,24 @@
   </footer>
 
   <script src="assets/js/app.js"></script>
-  <script>window.App.initHome();</script>
+  <script>
+    // Home init
+    window.App.initHome();
+
+    // ساخت نوار دسته‌بندی افقی از روی داده‌ها (بدون تغییر app.js)
+    fetch("assets/data/products.json", { cache: "no-store" })
+      .then(r => r.json())
+      .then(list => {
+        const cats = Array.from(new Set(list.map(x => x.category).filter(Boolean)));
+        const host = document.getElementById("catsStrip");
+        if (!host) return;
+        host.innerHTML = cats.map(c => `
+          <a class="catPill" href="products.html?cat=${encodeURIComponent(c)}">
+            <span class="catPill__dot"></span>
+            <span>${c}</span>
+          </a>
+        `).join("");
+      });
+  </script>
 </body>
 </html>
